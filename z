@@ -1,0 +1,76 @@
+
+test.elf:     file format elf32-littlearm
+
+
+Disassembly of section .startup:
+
+00010000 <_Start>:
+   10000:	e59fd004 	ldr	sp, [pc, #4]	; 1000c <_Start+0xc>
+   10004:	eb003ffd 	bl	20000 <entry>
+   10008:	eafffffe 	b	10008 <_Start+0x8>
+   1000c:	00026000 	andeq	r6, r2, r0
+
+Disassembly of section .text:
+
+00020000 <entry>:
+   20000:	e92d4800 	push	{fp, lr}
+   20004:	e28db004 	add	fp, sp, #4
+   20008:	e24dd008 	sub	sp, sp, #8
+   2000c:	e59f3024 	ldr	r3, [pc, #36]	; 20038 <entry+0x38>
+   20010:	e50b3008 	str	r3, [fp, #-8]
+   20014:	e59f3020 	ldr	r3, [pc, #32]	; 2003c <entry+0x3c>
+   20018:	e50b300c 	str	r3, [fp, #-12]
+   2001c:	e59f301c 	ldr	r3, [pc, #28]	; 20040 <entry+0x40>
+   20020:	e50b3008 	str	r3, [fp, #-8]
+   20024:	e51b3008 	ldr	r3, [fp, #-8]
+   20028:	e12fff33 	blx	r3
+   2002c:	e1a00003 	mov	r0, r3
+   20030:	e24bd004 	sub	sp, fp, #4
+   20034:	e8bd8800 	pop	{fp, pc}
+   20038:	000100b0 	strheq	r0, [r1], -r0	; <UNPREDICTABLE>
+   2003c:	00020014 	andeq	r0, r2, r4, lsl r0
+   20040:	00020044 	andeq	r0, r2, r4, asr #32
+
+00020044 <.rawdata>:
+   20044:	101f1000 	andsne	r1, pc, r0
+   20048:	e28db000 	add	fp, sp, #0
+   2004c:	e59f3010 	ldr	r3, [pc, #16]	; 20064 <.rawdata+0x20>
+   20050:	e3a02023 	mov	r2, #35	; 0x23
+   20054:	e5832000 	str	r2, [r3]
+   20058:	e24bd000 	sub	sp, fp, #0
+   2005c:	e49db004 	pop	{fp}		; (ldr fp, [sp], #4)
+   20060:	e12fff1e 	bx	lr
+   20064:	101f1000 	andsne	r1, pc, r0
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002d41 	andeq	r2, r0, r1, asr #26
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000023 	andeq	r0, r0, r3, lsr #32
+  10:	4d524105 	ldfmie	f4, [r2, #-20]	; 0xffffffec
+  14:	45363239 	ldrmi	r3, [r6, #-569]!	; 0xfffffdc7
+  18:	00532d4a 	subseq	r2, r3, sl, asr #26
+  1c:	01080506 	tsteq	r8, r6, lsl #10
+  20:	04120109 	ldreq	r0, [r2], #-265	; 0xfffffef7
+  24:	01150114 	tsteq	r5, r4, lsl r1
+  28:	01180317 	tsteq	r8, r7, lsl r3
+  2c:	Address 0x000000000000002c is out of bounds.
+
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347 	bcc	10d0d24 <stack_top+0x10aad24>
+   4:	2e342820 	cdpcs	8, 3, cr2, cr4, cr0, {1}
+   8:	2d342e38 	ldccs	14, cr2, [r4, #-224]!	; 0xffffff20
+   c:	31312b31 	teqcc	r1, r1, lsr fp
+  10:	2029312d 	eorcs	r3, r9, sp, lsr #2
+  14:	2e382e34 	mrccs	14, 1, r2, cr8, cr4, {1}
+  18:	30322034 	eorscc	r2, r2, r4, lsr r0
+  1c:	32313431 	eorscc	r3, r1, #822083584	; 0x31000000
+  20:	28203931 	stmdacs	r0!, {r0, r4, r5, r8, fp, ip, sp}
+  24:	656c6572 	strbvs	r6, [ip, #-1394]!	; 0xfffffa8e
+  28:	29657361 	stmdbcs	r5!, {r0, r5, r6, r8, r9, ip, sp, lr}^
+	...
